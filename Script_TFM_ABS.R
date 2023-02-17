@@ -63,12 +63,11 @@ colsCM <- (colnames(table) %in% c("RBP2019", "DISTAP",
                                     "E65_100PER","DENSITATPO",
                                     "NV_1PERC","NV_5PERC",
                                     "PERCENTARC","PERCENTARS",
-                                    "DIST_CAPME","DIST_DROGO",
+                                    "DIST_CAPME","DIST_DROGO", 
                                     "DIST_UNI","DIST_AJUNT",
                                     "DIST_CEPRI","DIST_CEPUB",
-                                    "DIST_PQPI"
-                                    ))
-tableaCM <- subset(table,,colsCM)
+                                    "DIST_PQPI"))
+tableaCM <- subset(table,colsCM)
 CM <- cor(tableaCM, method = c("pearson", "kendall", "spearman"))
 round(CM,2)
 
@@ -97,13 +96,6 @@ hist(table$PERCENTARS)
 hist(table$PERCENTARC)
 hist(table$NV_1PERC)
 hist(table$NV_5PERC)
-hist(table$DIST_CAPME)
-hist(table$DIST_DROGO)
-hist(table$DIST_UNI)
-hist(table$DIST_AJUNT)
-hist(table$DIST_CEPRI)
-hist(table$DIST_CEPUB)
-hist(table$DIST_PQPI)
 
 # PLOT SUMMARY TABLE
 summary(table)
@@ -123,13 +115,6 @@ sd(table$PERCENTARS)
 sd(table$PERCENTARC)
 sd(table$NV_1PERC)
 sd(table$NV_5PERC)
-sd(table$DIST_CAPME)
-sd(table$DIST_DROGO)
-sd(table$DIST_UNI)
-sd(table$DIST_AJUNT)
-sd(table$DIST_CEPRI)
-sd(table$DIST_CEPUB)
-sd(table$DIST_PQPI)
 
 # TABLE SUBDIVISION table 2 AMB/ table3 NO AMB (! EXCLOU VALORS)
 table2 = table[!table$AMB==0,] 
@@ -139,45 +124,39 @@ table3 = table[!table$AMB==1,]
 #install.packages("tidyverse")
 library(tidyverse) 
 model1a <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC + AMB +
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI , data = table)
+              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC + AMB , data = table)
 summary(model1a)
 
 # OLS REGRESSION WITH % CLC MODEL COMPLET
 library(tidyverse) 
 model1b <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC + AMB + 
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI , data = table)
+              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC + AMB , data = table)
 summary(model1b)
 
 # OLS REGRESSION MODEL NO AMB
 #install.packages("tidyverse")
 library(tidyverse) 
 model2a <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC  + 
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI  , data = table3)
+              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC , data = table3)
 summary(model2a)
 
 # OLS REGRESSION WITH % CLC MODEL NO AMB
 library(tidyverse) 
 model2b <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC  + 
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI, data = table3)
+              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC, data = table3)
 summary(model2b)
 
 # OLS REGRESSION MODEL AMB
 #install.packages("tidyverse")
 library(tidyverse) 
 model3a <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC  + 
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI , data = table2)
+              DISTMTR_15 + DISTBUS_16 + A_SPRWL_M2 + A_INDUS_M2 + A_CMPCT_M2 + NV_1PERC + NV_5PERC , data = table2)
 summary(model3a)
 
 # OLS REGRESSION WITH % CLC MODEL AMB
 library(tidyverse) 
 model3b <- lm(RBP2019 ~ DENSITATPO + E_MITJANA + CAPCOM + LITORAL + DIST_APIAV +  DISTF_14 + DISTCBD_13 +
-              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC  + 
-                DIST_CAPME + DIST_DROGO + DIST_UNI + DIST_AJUNT + DIST_CEPRI + DIST_CEPUB + DIST_PQPI, data = table2)
+              DISTMTR_15 + DISTBUS_16 + PERCENTARI + PERCENTARS + PERCENTARC + NV_1PERC + NV_5PERC, data = table2)
 summary(model3b)
 
 #SCATTERPLOT (proves)
